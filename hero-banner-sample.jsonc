@@ -1,0 +1,173 @@
+{
+  // ===========================================================================
+  // CẤU HÌNH KHỐI (BLOCK CONFIG) - Cung cấp từ Layout API
+  // ===========================================================================
+
+  // Mã định danh duy nhất của khối trong layout (Max 50 ký tự)
+  "blockId": "hero_banner_home",
+
+  // Loại component hệ thống: HERO_BANNER
+  "blockType": "HERO_BANNER",
+
+  // Phiên bản giao diện áp dụng Theme Tokens (Mặc định: DEFAULT)
+  "uiType": "DEFAULT",
+
+  "config": {
+    "ui": {
+      // Chu kỳ tự động chuyển slide tính bằng ms (FSD: 3000ms - 10000ms)
+      "interval": 5000,
+
+      // Tỷ lệ khung hình banner theo Figma: 3:4 (368x480px). Hỗ trợ: 16:9, 4:3, 5:4, 3:4
+      "aspectRatio": "3:4",
+
+      // Cấu hình cụm chỉ báo trượt banner
+      "indicators": {
+        "shape": "DOT",       // Hình thái: DOT (chấm tròn) hoặc PILL (viên thuốc)
+        "alignment": "CENTER" // Căn lề ngang: LEFT | CENTER | RIGHT
+      },
+
+      // Căn lề cụm 3 nút CTA: LEFT | CENTER | RIGHT (Figma: Center)
+      "buttons": {
+        "alignment": "CENTER"
+      },
+
+      // Căn lề trục metadata (Logo, text, tags): LEFT | CENTER | RIGHT (Figma: Center)
+      "metadataBlock": {
+        "alignment": "CENTER"
+      }
+    },
+    "media": {
+      // Tự động phát video teaser không tiếng
+      "autoplayMuted": true
+    }
+  },
+
+  // ===========================================================================
+  // DANH SÁCH DỮ LIỆU BANNER (ITEMS PAYLOAD) - Tối đa 20 items
+  // ===========================================================================
+  "items": [
+    {
+      // ID banner duy nhất (Max 50 ký tự)
+      "bannerId": "banner_movie_640146",
+
+      // Phân loại nội dung: MOVIE | SERIES | EVENT | OTHER
+      "bannerType": "MOVIE",
+
+      // Tag xếp hạng / nổi bật phía trên tiêu đề (Max 20 ký tự). Figma: "Top 1 Action"
+      "topTag": "Top 1 Action",
+
+      // Dòng 1 - Thông tin ghép bởi Backend (Max 100 ký tự): [Năm] • [Quốc gia] • [Thời lượng] • [Độ tuổi]
+      "metaInfo": "2023 • America • 125 mins • 18+",
+
+      // Đối tượng ảnh tối ưu theo từng tỷ lệ
+      "images": {
+        // Logo typography PNG trong suốt đè lên banner (Figma: 194x60px)
+        "titleImage": "https://raw.githubusercontent.com/kiendt-design/movie-sample-data/refs/heads/main/titles/title-1.png",
+
+        // Ảnh nền 16:9 chất lượng cao không text
+        "backdropClean": "https://raw.githubusercontent.com/kiendt-design/movie-sample-data/refs/heads/main/backdrop-cleans/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg",
+
+        // Ảnh nền Gaussian blur + dim 60% làm ambient background
+        "backdropBlur": "https://raw.githubusercontent.com/kiendt-design/movie-sample-data/refs/heads/main/backdrop-blur/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg",
+
+        // Ảnh poster dọc tỷ lệ 2:3 phục vụ fallback hoặc card dọc
+        "posterClean": "https://raw.githubusercontent.com/kiendt-design/movie-sample-data/refs/heads/main/poster-cleans/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg"
+      },
+
+      // Dòng 2 - Mảng nhãn bổ sung (Tối đa 5 tags, hiển thị 1 dòng)
+      "tagsObject": [
+        {
+          "tagId": "tag_rating",
+          "img": "https://raw.githubusercontent.com/kiendt-design/movie-sample-data/refs/heads/main/tags/tag-1.png",
+          "text": "4.9",
+          "alt": "Rating 4.9" // Điểm đánh giá sao
+        },
+        {
+          "tagId": "tag_quality_4k",
+          "img": "https://raw.githubusercontent.com/kiendt-design/movie-sample-data/refs/heads/main/tags/tag-2.png",
+          "text": "4K",
+          "alt": "4K Ultra HD" // Độ phân giải video
+        },
+        {
+          "tagId": "tag_audio_atmos",
+          "img": "https://raw.githubusercontent.com/kiendt-design/movie-sample-data/refs/heads/main/tags/tag-3.png",
+          "alt": "Dolby Atmos" // Huy hiệu âm thanh
+        },
+        {
+          "tagId": "tag_multi_lang",
+          "text": "Multi-language",
+          "alt": "Đa ngôn ngữ" // Nhãn ngôn ngữ
+        },
+        {
+          "tagId": "tag_dubbed",
+          "text": "Dubbed",
+          "alt": "Lồng tiếng" // Nhãn hình thức thuyết minh
+        }
+      ],
+
+      // Cụm nút CTA tương tác (Tối đa 3 nút theo layout Figma)
+      "buttons": [
+        {
+          // Nút bên trái: Icon dấu cộng
+          "icon": "https://raw.githubusercontent.com/kiendt-design/movie-sample-data/refs/heads/main/buttons/btn-plus-add.png",
+          "text": "Favorite",
+          "action": {
+            "typeId": "ADD_TO_FAVORITE",
+            "payload": {
+              "contentId": "640146"
+            }
+          }
+        },
+        {
+          // Nút chính giữa: Primary CTA phát video full-screen
+          "icon": "https://raw.githubusercontent.com/kiendt-design/movie-sample-data/refs/heads/main/buttons/btn-play.png",
+          "text": "Watch Now",
+          "action": {
+            "typeId": "NAVIGATE_TO_PLAY",
+            "payload": {
+              "videoId": "640146"
+            }
+          }
+        },
+        {
+          // Nút bên phải: Xem trang thông tin chi tiết
+          "icon": "https://raw.githubusercontent.com/kiendt-design/movie-sample-data/refs/heads/main/buttons/btn-circle-info.png",
+          "text": "Details",
+          "action": {
+            "typeId": "NAVIGATE_TO_DETAIL",
+            "payload": {
+              "contentId": "640146"
+            }
+          }
+        }
+      ],
+
+      // Timestamp bắt đầu phát sóng (Dùng cho Live Event, VOD để null)
+      "startTimestamp": null,
+
+      // Timestamp kết thúc sự kiện (Dùng cho Live Event, VOD để null)
+      "endTimestamp": null,
+
+      // Số giây hiển thị đồng hồ đếm ngược trước giờ phát (0: Tắt đếm ngược)
+      "showCountdownBefore": 0,
+
+      // Hành vi khi click trực tiếp vào khung banner
+      "action": {
+        "typeId": "NAVIGATE_TO_PLAY",
+        "payload": {
+          "videoId": "640146"
+        }
+      }
+    }
+  ],
+
+  // Phân trang dữ liệu
+  "pageInfo": {
+    "limit": 20,
+    "hasMore": false,
+    "nextCursor": null
+  },
+
+  // Thời gian hết hạn cache CDN (ISO 8601 UTC)
+  "expiresAt": "2026-10-01T00:00:00Z"
+}
